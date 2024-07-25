@@ -57,7 +57,7 @@ const doctorController = {
       }
 
       // Compare password
-      const isMatch = await bcrypt.compare(password, doctor.password);
+      const isMatch = bcrypt.compare(password, doctor.password);
       if (!isMatch) {
         return res.status(400).json({ message: 'Invalid credentials' });
       }
