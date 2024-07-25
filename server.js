@@ -16,7 +16,7 @@ const app = express();
 let server;
 
 // Use MongoStore as session store
-const sessionConnectionUri = config.DBConnectionLink || "mongodb+srv://abdulhafis2847:pious2847@hospitalhub.6tewsgp.mongodb.net/";
+const sessionConnectionUri = process.env.DBConnectionLink || "mongodb+srv://abdulhafis2847:pious2847@hospitalhub.6tewsgp.mongodb.net/";
 app.use(session({
   secret: 'Secret_Key',
   resave: true,

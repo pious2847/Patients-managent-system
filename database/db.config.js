@@ -6,7 +6,8 @@ const config = require("../config");
 
 const ConnectDB = async () => {
   try {
-    const uri = config.DBConnectionLink || "mongodb+srv://abdulhafis2847:YwXKPILeI8AJxWzE@hospitalhub.6tewsgp.mongodb.net/";
+    const uri = process.env.DBConnectionLink || "mongodb+srv://abdulhafis2847:pious2847@hospitalhub.6tewsgp.mongodb.net/";
+    console.log("mongodb url" , uri)
     if (!uri) {
       throw new Error('DBConnectionLink is not defined in environment variables');
     }
