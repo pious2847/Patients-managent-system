@@ -56,7 +56,7 @@ const doctorController = {
       }
 
       // Compare password
-      const isMatch = bcrypt.compare(password, doctor.password);
+      const isMatch = await bcrypt.compare(password, doctor.password);
       if (!isMatch) {
         return res.status(400).json({ message: 'Invalid credentials' });
       }
@@ -64,7 +64,11 @@ const doctorController = {
       // Create and send token
       const token = jwt.sign({ doctor }, config.JWT_SECRET, { expiresIn: '1d' });
 
-      res.status(200).json({ token, doctor: doctor });
+      // Create a doctor object without the password
+    const doctorResponse = doctor.toObject();
+    delete doctorResponse.password;
+
+    res.status(200).json({ token, doctor: doctorResponse });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Server error' });
