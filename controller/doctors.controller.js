@@ -65,7 +65,7 @@ const doctorController = {
       // Create and send token
       const token = jwt.sign({ id: doctor._id }, config.JWT_SECRET, { expiresIn: '1d' });
 
-      res.json({ token, doctor: doctor });
+      res.status(200).json({ token, doctor: doctor });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Server error' });
@@ -131,7 +131,6 @@ async verifyOtpCode(req, res) {
       if(!isupdated){
        return res.status(400).json({ message: "Unable to change Doctor password. Please try again" });
       }
-     
       res.json({ doctor: doctor,  message: "Password  successfully updated" });
     } catch (error) {
       console.error(error);
