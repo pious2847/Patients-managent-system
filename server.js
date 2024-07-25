@@ -76,7 +76,7 @@ process.on("uncaughtException", (err) => {
 startServer();
 // Function to handle server and database connections
 async function startServer() {
-  const PORT = process.env.PORT || 8080;
+  const PORT = config.PORT || 8080;
   try {
     // Start the HTTP server (which also starts the WebSocket server)
     server =  app.listen(PORT, (error) => {
