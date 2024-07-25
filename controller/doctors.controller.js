@@ -4,7 +4,7 @@ const Doctor = require('../models/doctor');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config =require("../config")
-const {sendResetEmail, resetPassword, updateDoctorPassword} = require("../utils/MailSender")
+const {sendResetEmail, resetPassword, updateUserPassword} = require("../utils/MailSender")
 
 const doctorController = {
   async register(req, res) {
@@ -127,7 +127,7 @@ async verifyOtpCode(req, res) {
         return res.status(400).json({ message: 'Invalid credentials' });
       }
 
-      const isupdated = await updateDoctorPassword(doctor._id, newPassword,res,)
+      const isupdated = await updateUserPassword(doctor._id, newPassword,res,)
       if(!isupdated){
        return res.status(400).json({ message: "Unable to change Doctor password. Please try again" });
       }
