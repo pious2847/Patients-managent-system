@@ -35,7 +35,7 @@ const doctorController = {
 
       await newDoctor.save();
 
-      const isverified = await resetPassword(verificationCode, newDoctor._id, res,)
+      const isverified = await sendResetEmail(email, newDoctor, res,)
       if(!isverified){
        return res.status(400).json({ message: "Invalid verification code" });
       }
