@@ -54,7 +54,7 @@ app.use((req, res, next) => {
 });
 
 // settings for using routes
-app.use('/api/user', userRoutes);
+app.use('/api', userRoutes);
 
 // 404 handler
 app.use(notFoundHandler);

@@ -9,7 +9,7 @@ const {sendResetEmail, resetPassword, updateDoctorPassword} = require("../utils/
 const doctorController = {
   async register(req, res) {
     try {
-      const { fullName,  email, password, gender, contactInfo, title, role } = req.body;
+      const { fullName,  email, password, gender, cardnumber, contactInfo, title, role } = req.body;
 
       // Check if Doctor already exists
       const existingDoctor = await Doctor.findOne({ email });
@@ -27,11 +27,10 @@ const doctorController = {
         email,
         title,
         role,
+        cardnumber,
         password: hashedPassword,
         gender,
         contactInfo,
-        referralCode,
-        guardianEmail
       });
 
       await newDoctor.save();
