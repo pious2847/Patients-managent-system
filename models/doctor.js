@@ -8,6 +8,7 @@ const DoctorSchema = new mongoose.Schema(
     },
     cardnumber: {
       type: String,
+      require: true,
     },
     email: {
       type: String,
@@ -16,7 +17,6 @@ const DoctorSchema = new mongoose.Schema(
     title: {
       type: String,
       enum: ["Doctor", "Nurse"],
-      required: true,
     },
     role: {
       type: String,

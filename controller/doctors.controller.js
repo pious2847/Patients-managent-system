@@ -97,7 +97,7 @@ const doctorController = {
 
 async verifyOtpCode(req, res) {
     try {
-      const { verificationCode } = req.body;
+      const { verificationCode, email } = req.body;
       // Check if Doctor exists
       const doctor = await Doctor.findOne({ email });
       if (!doctor) {
@@ -120,14 +120,14 @@ async verifyOtpCode(req, res) {
 
   async resetPasswords(req, res) {
     try {
-      const { doctorId,newPassword } = req.body;
+      const { email,newPassword } = req.body;
       // Check if Doctor exists
-      const doctor = await Doctor.findOne({ doctorId });
+      const doctor = await Doctor.findOne({ email });
       if (!doctor) {
         return res.status(400).json({ message: 'Invalid credentials' });
       }
 
-      const isupdated = await updateDoctorPassword(deleteoctor._id, newPassword,res,)
+      const isupdated = await updateDoctorPassword(doctor._id, newPassword,res,)
       if(!isupdated){
        return res.status(400).json({ message: "Unable to change Doctor password. Please try again" });
       }
