@@ -39,7 +39,6 @@ const doctorController = {
       if(!isverified){
        return res.status(400).json({ message: "Invalid verification code" });
       }
-      res.status(201).json({ message: 'Account registered successfully' });
     } catch (error) {
       console.error(error.message);
       res.status(500).json({ message: 'Server error' });
@@ -85,10 +84,6 @@ const doctorController = {
       if(!isSent){
        return res.status(400).json({ message: "Error sending verification code" });
       }
-        // Create and send token
-      const token = jwt.sign({ id: doctor._id }, config.JWT_SECRET, { expiresIn: '1d' });
-
-      res.json({ token, doctor: doctor,  message: "Verification code sent successfully" });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Server error' });
@@ -103,15 +98,10 @@ async verifyOtpCode(req, res) {
       if (!doctor) {
         return res.status(400).json({ message: 'Invalid credentials' });
       }
-
       const isverified = await resetPassword(verificationCode, doctor._id, res,)
       if(!isverified){
        return res.status(400).json({ message: "Invalid verification code" });
       }
-        // Create and send token
-      const token = jwt.sign({ id: doctor._id }, config.JWT_SECRET, { expiresIn: '1d' });
-
-      res.json({ token, doctor: doctor ,  message: "Verification code sent successfully" });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Server error' });
@@ -131,7 +121,6 @@ async verifyOtpCode(req, res) {
       if(!isupdated){
        return res.status(400).json({ message: "Unable to change Doctor password. Please try again" });
       }
-      res.json({ doctor: doctor,  message: "Password  successfully updated" });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Server error' });
