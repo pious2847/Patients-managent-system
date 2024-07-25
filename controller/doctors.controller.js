@@ -63,7 +63,7 @@ const doctorController = {
       }
 
       // Create and send token
-      const token = jwt.sign({ id: doctor._id }, config.JWT_SECRET, { expiresIn: '1d' });
+      const token = jwt.sign({ doctor }, config.JWT_SECRET, { expiresIn: '1d' });
 
       res.status(200).json({ token, doctor: doctor });
     } catch (error) {
