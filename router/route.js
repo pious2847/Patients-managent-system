@@ -11,11 +11,11 @@ router.post("/reset-password", doctorController.resetPasswords)
 router.put('/doctors/:id', doctorController.updateDoctor);
 
 // Patient routes
-router.post('/patients', patientController.addPatient);
+router.post('/patients', doctorController.addPatient);
 router.post('/doctors/:doctorId/refer', doctorController.referPatient);
 router.get('/doctors/:doctorId/patients', doctorController.getPatients);
-router.get('/patients/:patientId', patientController.getPatientById);
-router.delete('/patients/:patientId', patientController.deletePatient);
-router.put('/patients/:patientId', patientController.updatePatient);
+router.get('/patients/:patientId', doctorController.getPatientById);
+router.delete('/patients/:patientId', doctorController.deletePatient);
+router.put('/patients/:patientId', doctorController.updatePatient);
 
 module.exports = router
