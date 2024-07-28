@@ -175,7 +175,8 @@ async verifyOtpCode(req, res) {
       // Return error response for other errors
       return res.status(500).json({ message: error.message });
     }
-  },
+  }
+  ,
   
   async referPatient(req, res){
     try {
