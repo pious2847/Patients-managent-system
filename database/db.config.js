@@ -1,4 +1,3 @@
-// src/configs/configs.database.js
 const mongoose = require('mongoose');
 const config = require("../config");
 
