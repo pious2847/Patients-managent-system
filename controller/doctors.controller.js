@@ -200,16 +200,28 @@ async verifyOtpCode(req, res) {
     }
   },
 
-  async getPatients(req, res){
+  async getPatients(req, res) {
     try {
-      const {doctorId} = req.params;
-      const doctor = await Doctor.findOne({_id: doctorId});
-      if(!doctor) return res.status(400).json({message: "Doctor not found"});
-      const patients = await Patient.find({_id: {$in: doctor.patients}});
-      if(!patients) return res.status(400).json({message: "No patients found"});
-      return res.status(200).json({patients});
+      const { doctorId } = req.params;
+    
+      // Find the doctor and populate the patients field
+      const doctor = await Doctor.findById(doctorId).populate('patients');
+  
+      if (!doctor) {
+        return res.status(404).json({ message: "Doctor not found" });
+      }
+  
+      // Check if the doctor has any patients
+      if (!doctor.patients || doctor.patients.length === 0) {
+        return res.status(200).json({ message: "No patients found for this doctor", patients: [] });
+      }
+  
+      // Return the patients
+      return res.status(200).json({ patients: doctor.patients });
+  
     } catch (error) {
-      return res.status(500).json({message: error.message});
+      console.error('Error in getPatients:', error);
+      return res.status(500).json({ message: "An error occurred while fetching patients" });
     }
   },
 
