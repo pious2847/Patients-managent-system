@@ -10,14 +10,10 @@ const PatientSchema = new mongoose.Schema({
     email: String,
     address: String
   },
-  medicalRecords: [
-    {
-        date: Date,
-        diagnosis: String,
-        treatment: String,
-        notes: String
-      }
-  ],
+  diagnosis: {
+        type: String,
+        required: true,
+      },
   expenses: [
     {
         date: Date,
@@ -27,8 +23,8 @@ const PatientSchema = new mongoose.Schema({
   ],
   status: {
     type: String,
-    enum: ['Active', 'Inactive', 'Discharged'],
-    default: 'Active'
+    enum: ['Admitted',  'Discharged'],
+    default: 'Admitted'
   }
 }, {timeStamp: true});
 
