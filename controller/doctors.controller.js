@@ -149,12 +149,12 @@ async verifyOtpCode(req, res) {
 
   async addPatient(req, res) {
     try {
-      const { name, dateOfBirth, contactInfo,  dignosis, expenses,} = req.body;
+      const { name, dateOfBirth, contactInfo,  diagnosis, expenses,} = req.body;
       const newPatient = new Patient({
         name,
         dateOfBirth,
         contactInfo,
-        dignosis,
+        diagnosis,
         expenses
       });
       await newPatient.save();
