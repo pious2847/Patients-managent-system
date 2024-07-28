@@ -149,23 +149,25 @@ async verifyOtpCode(req, res) {
 
   async addPatient(req, res) {
     try {
-      const { name, dateOfBirth, contactInfo, diagnosis, expenses, status } = req.body;
+      const { name, dateOfBirth, phone, email, address, diagnosis, expenses, status } = req.body;
   
       // Creating a new Patient object
       const newPatient = new Patient({
         name,
         dateOfBirth,
-        contactInfo,
+        phone,
+        email,
+        address,
         diagnosis,
         expenses,
-        status: status || 'Admitted' // Ensure status defaults to 'Admitted' if not provided
+        status: status || "Admitted" // Use the provided status or default to "Admitted"
       });
   
       // Save the new patient to the database
-      await newPatient.save();
+      const savedPatient = await newPatient.save();
   
       // Return success response
-      return res.status(200).json({ message: "Patient added successfully" });
+      return res.status(201).json({ message: "Patient added successfully", patient: savedPatient });
   
     } catch (error) {
       // Check if the error is a validation error
@@ -173,10 +175,10 @@ async verifyOtpCode(req, res) {
         return res.status(400).json({ message: error.message });
       }
       // Return error response for other errors
-      return res.status(500).json({ message: error.message });
+      console.error('Error adding patient:', error);
+      return res.status(500).json({ message: "An error occurred while adding the patient" });
     }
-  }
-  ,
+  },
   
   async referPatient(req, res){
     try {
