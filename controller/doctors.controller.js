@@ -154,7 +154,7 @@ async verifyOtpCode(req, res) {
         name,
         dateOfBirth,
         contactInfo,
-        diagnosis,
+        diagnosis: diagnosis,
         expenses
       });
       await newPatient.save();
