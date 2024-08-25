@@ -15,6 +15,7 @@ const patientSchema = new mongoose.Schema({
     type: String,
     enum: ["Admitted", "Discharged"],
     default: "Admitted",
+    trim: true
   },
 });
 
