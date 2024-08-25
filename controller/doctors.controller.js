@@ -204,16 +204,17 @@ const doctorController = {
       });
 
       // Save the new patient to the database
-      const savedPatient = await newPatient.save();
+      await newPatient.save();
 
-      await doctor.patients.push(savedPatient._id);
+      await doctor.patients.push(newPatient._id);
       await doctor.save();
 
       // Return success response
       return res
         .status(201)
-        .json({ message: "Patient added successfully", patient: savedPatient });
+        .json({ message: "Patient added successfully", patient: newPatient });
     } catch (error) {
+      console.log(`Error adding patient: ${error.message}`);
       // Check if the error is a validation error
       if (error.name === "ValidationError") {
         return res.status(400).json({ message: error.message });
