@@ -186,6 +186,11 @@ const doctorController = {
         status,
       } = req.body;
 
+      const {doctorId} = req.params
+      const doctor = await Doctor.findById(doctorId);
+      if(!doctor){
+        res.status(404).json({message: "Doctor not found"});
+      }
       // Creating a new Patient object
       const newPatient = new Patient({
         name,
@@ -200,6 +205,9 @@ const doctorController = {
 
       // Save the new patient to the database
       const savedPatient = await newPatient.save();
+
+      await doctor.patients.push(savedPatient._id);
+      await doctor.save();
 
       // Return success response
       return res

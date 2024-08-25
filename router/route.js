@@ -11,7 +11,7 @@ router.post("/reset-password", doctorController.resetPasswords)
 router.put('/doctors/:id', doctorController.updateDoctor);
 
 // Patient routes
-router.post('/patients', doctorController.addPatient);
+router.post('/patients/:doctorId', doctorController.addPatient);
 router.post('/doctors/:doctorId/refer', doctorController.referPatient);
 router.get('/doctors/:doctorId/patients', doctorController.getPatients);
 router.get('/patients/:patientId', doctorController.getPatientById);
