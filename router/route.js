@@ -14,6 +14,7 @@ router.put('/doctors/:id', doctorController.updateDoctor);
 router.post('/patients/:doctorId', doctorController.addPatient);
 router.post('/doctors/:doctorId/refer', doctorController.referPatient);
 router.get('/doctors/:doctorId/patients', doctorController.getPatients);
+router.get('/doctor/:doctorId', doctorController.getDoctorById)
 router.get('/patients/:patientId', doctorController.getPatientById);
 router.delete('/patients/:patientId', doctorController.deletePatient);
 router.put('/patients/:patientId', doctorController.updatePatient);

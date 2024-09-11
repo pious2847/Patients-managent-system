@@ -173,6 +173,20 @@ const doctorController = {
     }
   },
 
+  async getDoctorById(req, res) {
+    try {
+      const { doctorId } = req.params;
+
+      const doctor = await Doctor.findOne({ _id: doctorId });
+      if (!doctor)
+        return res.status(400).json({ message: "Patient not found" });
+      return res.status(200).json({ doctor });
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  },
+
+  
   async addPatient(req, res) {
     try {
       const {
