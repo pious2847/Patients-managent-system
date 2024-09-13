@@ -10,6 +10,7 @@ const {
   resetPassword,
   updateUserPassword,
 } = require("../utils/MailSender");
+const analyzePatientRecords = require('../utils/patientAnalysis');
 
 const doctorController = {
   async register(req, res) {
@@ -341,6 +342,15 @@ const doctorController = {
       return res.status(400).json({ message: error.message });
     }
   },
+  async generateReport(req, res){
+    try {
+      const report = await analyzePatientRecords();
+
+      res.status(200).json({message: "Analysis completed successfully", report: report})
+    } catch (error) {
+      console.error('Error generating report:', error);
+    }
+  }
 };
 
 module.exports = doctorController;
