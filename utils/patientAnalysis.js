@@ -3,7 +3,7 @@ const Patient = require("../models/patients");
 
 async function analyzePatientRecords() {
   try {
-    const patients = await Patient.find({});
+    const patients = await Patient.find();
     
     // Helper function to calculate age
     const calculateAge = (birthDate) => {
