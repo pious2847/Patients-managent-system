@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const Patient = require("../models/patients");
 
 
@@ -66,6 +65,8 @@ async function analyzePatientRecords() {
         dischargedCount: patients.filter(patient => patient.status === 'Discharged').length
       }
     };
+
+    console.log("REPORT", report);
 
     return report;
   } catch (error) {

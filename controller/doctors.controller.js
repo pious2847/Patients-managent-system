@@ -342,12 +342,15 @@ const doctorController = {
       return res.status(400).json({ message: error.message });
     }
   },
+
   async generateReport(req, res){
     try {
       const report = await analyzePatientRecords();
-      res.status(200).json({message: "Analysis completed successfully", report: report})
+      return res.status(200).json({message: "Analysis completed successfully", report: report})
     } catch (error) {
+      console.log(error);
       console.error('Error generating report:', error);
+      return res.status(400).json({ message: error.message });
     }
   }
 };
