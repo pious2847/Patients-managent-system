@@ -66,7 +66,6 @@ async function analyzePatientRecords() {
       }
     };
 
-    console.log("REPORT", report);
 
     return report;
   } catch (error) {
